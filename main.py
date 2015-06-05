@@ -1,13 +1,15 @@
 # -*- coding: utf8 -*-
 import maze  
 import player 
+from gamehelper import*
+
 
       
 p = [0]
 
 
 
-M = maze.Maze()                              #設定迷宮及初始位置
+M = maze.Maze()                             
 
 i = 1
 player_number = input("Please enter the number of player : ")
@@ -19,7 +21,7 @@ while i <= player_number:
 
 i = 1
 while i <= player_number:   
-    M.now_playing(p[i]) 
+    Gamehelper.now_playing(p[i],M) 
     if M.out_maze(i) == 1:
         break
     if i == player_number:

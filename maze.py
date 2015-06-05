@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 import random
 import player 
-
+from gamehelper import*
 
 
 class Maze:
@@ -35,17 +35,6 @@ class Maze:
             
 
 
-    def now_playing(self,p):
-
-            self.clear()
-            self.print_maze()
-            print ("現在是玩家\r"),
-            print (p.get_who()),
-            print ("的回合!\r"),
-            print
-            movement = p.movement()
-            if movement=='w' or  movement=='s' or  movement=='a' or  movement=='d' :
-              self.move(movement,p)
             
 
     def print_maze(self):                         #列印迷宮
@@ -131,9 +120,7 @@ class Maze:
         else:
             return 0
 
-    def clear(self):                                                    #強制清屏
-        for i in range(40):
-            print
+
 
     def get_position(self,row,column,who):
         player_row[who] = row
