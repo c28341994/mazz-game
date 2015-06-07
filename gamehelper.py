@@ -7,7 +7,9 @@ class Gamehelper:
 
     @classmethod 
     def now_playing(cls,p,m,plist):
-            who = p.get_who()
+        who = p.get_who()
+        if p.get_live()> 0 :
+            
             cls.clear()
             m.print_maze(who)
             print ("現在是玩家\r")
@@ -23,9 +25,18 @@ class Gamehelper:
                      if cls.direct=='w' or  cls.direct=='s' or  cls.direct=='a' or  cls.direct=='d' :               
                            cls.judgeatk(p,m,cls.direct,p.atk(),plist)
                            break
-                     else :
-                           print "It's not a correct command"
-                              
+            elif movement == "noop":
+                 i = 1
+            elif movement == "close":
+                 cls.row ,cls.col =  plist[who+1].	get_position()
+                 p.set_position(cls.row+1,cls.col)
+                 m.set_position(who,cls.row+1,cls.col)				 
+            else :
+                print "It's not a correct command"
+        else :
+                print "P",who,"  It's not your business "
+
+                time.sleep(2)				
    
     @staticmethod
     def clear():                                                    #強制清屏
@@ -34,7 +45,7 @@ class Gamehelper:
 
     @classmethod 
     def judgeatk(cls,p,m,direct,value,plist):
-        cls.col ,cls.row = p.get_position()
+        cls.row ,cls.col = p.get_position()
          
         if direct == 'w':
            cls.element = m.get_element(cls.row-1,cls.col)
@@ -44,9 +55,19 @@ class Gamehelper:
            cls.element = m.get_element(cls.row,cls.col+1)
         elif direct == 's':
            cls.element = m.get_element(cls.row+1,cls.col)
-                  
+        
+        print  cls.col ,cls.row, cls.element 
+         
         if cls.element == 0 or cls.element == 1:
            print "You deal massive damage to air"
            time.sleep(3)
-        #elif  
+        elif  2 <=  cls.element and cls.element <=7 :
+           cls.atk = p.atk()
+           plist[cls.element-2].damaged(cls.atk)
+           print "You deal ",cls.atk," damage to P",cls.element-2
+           if plist[cls.element-2].get_live()<=0 :
+                cls.row ,cls.col = plist[cls.element-2].get_position()
+                m.set_element(cls.row,cls.col,0)
+                print "P",cls.element-2,"you are  dead"
+           time.sleep(3)           	
            

@@ -13,7 +13,7 @@ class Maze:
     
     
     def __init__(self):         #初始化迷宮
-        self.__maze = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        self.__maze =  [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                      [1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
                      [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1],
                      [1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1],
@@ -47,11 +47,21 @@ class Maze:
             if self.__maze[player_row[who]][player_column[who]] == 0 :
                 self.__maze[player_row[who]][player_column[who]] = who+2
                 return player_row[who],player_column[who]       
+     
+    def set_element(self,row,col,element):
+          
+		  self.__maze[row][col]  =  element
+	
+	
+    def get_element(self,row,col):
+           
+         return self.__maze[row][col]    
 
-            
-
-
-            
+    def  set_position (self,who,row,col) :         
+          self.__maze[player_row[who]][player_column[who]] = 0
+          player_row[who] = row
+          player_column[who] = col  
+          self.__maze[player_row[who]][player_column[who]] = who+2
 
     def print_maze(self,who):                         #列印迷宮
         for i in range(0, 25, 1):
@@ -140,14 +150,6 @@ class Maze:
             return 0
 
 
-
-    def get_position(self,row,column,who):
-        player_row[who] = row
-        player_column[who] = column
-        
-    def get_element(self,row,col):
-           
-         return self.__maze[row][col]    
 
 
     
