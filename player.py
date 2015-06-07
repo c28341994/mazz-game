@@ -1,13 +1,14 @@
 # -*- coding: utf8 -*-
 
 import random
+from gamehelper import*
 
 class Player :
 
    def  __init__(self,who):                                            #設定玩家血量、傷害
         self.__who = who
         self.__hp = 10
-        self.__dmg = 0
+        self.__dmg = 3
         self.__row = 0
         self.__column = 0
         
@@ -30,7 +31,7 @@ class Player :
            if self.x == 'mv':                                          #玩家選擇移動則回傳其欲移動方向 
               return self.move()
            elif self.x == 'atk':                                       #玩家選擇攻擊，則回傳其攻擊力
-              return self.atk()
+              return 'atk'
            else:
               print "It's not a correct command"
    def  move(self):
@@ -42,9 +43,11 @@ class Player :
          else:
             print "It's not a correct command"
    def atk(self):
-      
-      self.__dmg = random.randrange(0,7)
-      return self.__dmg
+
+         return random.randrange(0,self.__dmg)
+	  
+          	  
+	
 
  
    

@@ -1,6 +1,6 @@
 from player import Player
 
-class boss(Player):
+class Boss(Player):
 
 
     def __init__(self):

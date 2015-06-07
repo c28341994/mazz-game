@@ -1,11 +1,12 @@
 # -*- coding: utf8 -*-
 import maze  
 import player 
+import boss
 from gamehelper import*
 
 
       
-p = [0]
+p = [boss.Boss()]
 
 
 
@@ -21,7 +22,7 @@ while i <= player_number:
 
 i = 1
 while i <= player_number:   
-    Gamehelper.now_playing(p[i],M) 
+    Gamehelper.now_playing(p[i],M,p) 
     if M.out_maze(i) == 1:
         break
     if i == player_number:
