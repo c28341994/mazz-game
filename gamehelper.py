@@ -9,39 +9,47 @@ class Gamehelper:
     def now_playing(cls,p,m,plist):
         who = p.get_who()
         if p.get_live()> 0 :
-            
             cls.clear()
             m.print_maze(who)
-            print ("現在是玩家\r")
-            print (who)
-            print ("的回合!\r")
-            print
+            if who!= 0 :
+               print ("現在是玩家\r")
+               print (who)
+               print ("的回合!\r")
+               print
             movement = p.movement()
             if movement=='w' or  movement=='s' or  movement=='a' or  movement=='d' :
-                m.move(movement,p)
+                   m.move(movement,p)
             elif movement == "atk":
-                while 1:
-                     cls.direct  = raw_input ("Where do you want to attack?")
-                     if cls.direct=='w' or  cls.direct=='s' or  cls.direct=='a' or  cls.direct=='d' :               
-                           cls.judgeatk(p,m,cls.direct,p.atk(),plist)
-                           break
+                   cls.direct = p.atk_pos()  
+                   cls.judgeatk(p,m,cls.direct,p.atk(),plist)
             elif movement == "noop":
-                 i = 1
+                    pass
             elif movement == "close":
-                 cls.row ,cls.col =  plist[who+1].	get_position()
-                 p.set_position(cls.row+1,cls.col)
-                 m.set_position(who,cls.row+1,cls.col)				 
+                    cls.row ,cls.col =  plist[who+1].get_position()
+                    if m.get_element(cls.row,cls.col) == 0 :
+                          p.set_position(cls.row+1,cls.col)
+                          m.set_position(who,cls.row+1,cls.col)
+                    else :
+                       print "You can't go to there" 
+                       time.sleep(2)
             else :
-                print "It's not a correct command"
+                  print "It's not a correct command"
+
+          
+
         else :
                 print "P",who,"  It's not your business "
 
-                time.sleep(2)				
-   
+                time.sleep(2)
+
+
+				
     @staticmethod
     def clear():                                                    #強制清屏
         for i in range(40):
             print
+
+
 
     @classmethod 
     def judgeatk(cls,p,m,direct,value,plist):
