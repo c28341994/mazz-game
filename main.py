@@ -5,12 +5,13 @@ import boss
 from gamehelper import*
 
 
-      
-p = [boss.Boss()]
-
-
 
 M = maze.Maze()                             
+
+      
+p = [boss.Boss()]
+row,column = M.rand_position(0)
+p[0].set_position(row,column)  
 
 i = 1
 player_number = input("Please enter the number of player : ")
@@ -20,12 +21,13 @@ while i <= player_number:
     p[i].set_position(row,column)  
     i+=1
 
+
 i = 1
 while i <= player_number:   
     Gamehelper.now_playing(p[i],M,p) 
     if M.out_maze(i) == 1:
         break
     if i == player_number:
-        i = 0
+        i = -1
     i += 1
 
