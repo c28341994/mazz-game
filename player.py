@@ -3,7 +3,7 @@
 import random
 from gamehelper import*
 
-class Player(object) :
+class Player :
 
    def  __init__(self,who):                                            #設定玩家血量、傷害
         self.__who = who
@@ -12,7 +12,6 @@ class Player(object) :
         self.__dmg = 20
         self.__row = 0
         self.__column = 0
-        self.__key = 0
         
    def set_position(self,row,column):
         self.__row = row
@@ -50,15 +49,9 @@ class Player(object) :
          else:
             print "It's not a correct command"
    def atk(self):
+
          return random.randrange(0,self.__dmg)
- 
-   def atk_pos(self) :
-         while 1:
-            self.direct  = raw_input ("Where do you want to attack?")
-            if self.direct=='w' or  self.direct=='s' or  self.direct=='a' or  self.direct=='d' :               
-                return self.direct
-            else :             
-                print "Wrong direct"  
+  
    def  damaged(self,value):
    
          self.__hp =  self.__hp - value
