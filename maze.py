@@ -63,29 +63,33 @@ class Maze:
           player_column[who] = col  
           self.__maze[player_row[who]][player_column[who]] = who+2
 
-    def print_maze(self,who):                         #列印迷宮
+    def print_maze(self,p):                         #列印迷宮
+        who = p.get_who()
         for i in range(0, 25, 1):
             for j in range(0, 25, 1):
-                if self.__maze[i][j] == 0 : 
-                  print " ",               				  #無東西
-                elif self.__maze[i][j] == who+2 :
-                  print("@"),  
-                elif self.__maze[i][j] == 1 : 
-                  print("*"),                                 #牆壁
-                elif self.__maze[i][j] == 2 : 
-                  print("B"),                                 #boss
-                elif self.__maze[i][j] == 3 : 
-                  print("1"),                                 #玩家1
-                elif self.__maze[i][j] == 4 : 
-                  print("2"),                                 #玩家2
-                elif self.__maze[i][j] == 5 : 
-                  print("3"),                                 #玩家3
-                elif self.__maze[i][j] == 6 : 
-                  print("4"),                                 #玩家4
-                elif self.__maze[i][j] == 7 : 
-                  print("5"),                                 #玩家5  
+                if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense(): 
+                    if self.__maze[i][j] == 0 : 
+                      print " ",               				  #無東西
+                    elif self.__maze[i][j] == who+2 :
+                      print("@"),  
+                    elif self.__maze[i][j] == 1 : 
+                      print("*"),                                 #牆壁
+                    elif self.__maze[i][j] == 2 : 
+                      print("B"),                                 #boss
+                    elif self.__maze[i][j] == 3 : 
+                      print("1"),                                 #玩家1
+                    elif self.__maze[i][j] == 4 : 
+                      print("2"),                                 #玩家2
+                    elif self.__maze[i][j] == 5 : 
+                      print("3"),                                 #玩家3
+                    elif self.__maze[i][j] == 6 : 
+                      print("4"),                                 #玩家4
+                    elif self.__maze[i][j] == 7 : 
+                      print("5"),                                 #玩家5  
+                    else:
+                      print("$"),                                 #終點
                 else:
-                  print("$"),                                 #終點
+                    print " ",
             print
 
 

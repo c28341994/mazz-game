@@ -10,13 +10,16 @@ class Gamehelper:
         who = p.get_who()
         if p.get_live()> 0 :
             cls.clear()
-            m.print_maze(who)
+            m.print_maze(p)
             if who!= 0 :
                print ("現在是玩家\r")
                print (who)
                print ("的回合!\r")
                print
-            movement = p.movement()
+            else :
+               print ("現在是Boss的回合!\r")
+               print
+            movement = p.movement(plist)
             if movement=='w' or  movement=='s' or  movement=='a' or  movement=='d' :
                    m.move(movement,p)
             elif movement == "atk":

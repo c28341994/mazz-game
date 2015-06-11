@@ -13,6 +13,7 @@ class Player(object) :
         self.__row = 0
         self.__column = 0
         self.__key = 0
+        self.__sense = 3       #Player的感應範圍
         
    def set_position(self,row,column):
         self.__row = row
@@ -21,14 +22,21 @@ class Player(object) :
    def get_who(self):
         return self.__who
 
+   def get_sense(self):
+        return self.__sense 
+
 
    def get_position(self):
         return self.__row, self.__column
+   def get_row(self):
+        return self.__row
+   def get_column(self):
+        return self.__column
 
    def get_live(self):
         return self.__live 
    
-   def  movement(self):                                                #決定玩家行動
+   def  movement(self,plist):                                                #決定玩家行動
         while 1:
            self.x = raw_input("Please enter what you want to do : ")
            if self.x == "mv":                                          #玩家選擇移動則回傳其欲移動方向 
