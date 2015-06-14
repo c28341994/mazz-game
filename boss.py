@@ -11,7 +11,7 @@ class Boss(Player):
     row = 6*[100]
     column = 6*[100]
     boss_direct = 'w'
-
+    damage = 5*[0]
 
     def __init__(self):
         super(Boss, self).__init__(0)
@@ -94,6 +94,20 @@ class Boss(Player):
         
     def atk_pos(self) :
          return boss_direct
+
+    def  damaged(self,who,value,plist) :
+         self.__hp =  self.__hp - value
+         damage[who] = damage[who]+value
+         print "Boss",self.__who,"have",self.__hp,"hp"
+         if self.__hp <= 0 :
+             self.__live = 0
+             rank = sorted(damage)
+             for i in range(5) :
+                if  damage[i] == rank[0] :
+                     la = i
+                     break
+             plist[i].set_key() 
+         
 
 
 if __name__ == "__main__" :

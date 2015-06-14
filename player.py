@@ -9,7 +9,7 @@ class Player(object) :
         self.__who = who
         self.__live = 1
         self.__hp = 10
-        self.__dmg = 20
+        self.__dmg = 3
         self.__row = 0
         self.__column = 0
         self.__key = 0
@@ -18,6 +18,14 @@ class Player(object) :
    def set_position(self,row,column):
         self.__row = row
         self.__column = column
+
+   def  set_key(self):
+  
+        self.__key = 1  
+
+   def  get_key(self):
+  
+        return self.__key   
 
    def get_who(self):
         return self.__who

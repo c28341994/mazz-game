@@ -72,7 +72,7 @@ class Gamehelper:
         if cls.element == 0 or cls.element == 1:
            print "You deal massive damage to air"
            time.sleep(3)
-        elif  2 <=  cls.element and cls.element <=7 :
+        elif  2 <  cls.element and cls.element <=7 :
            cls.atk = p.atk()
            plist[cls.element-2].damaged(cls.atk)
            print "You deal ",cls.atk," damage to P",cls.element-2
@@ -80,5 +80,29 @@ class Gamehelper:
                 cls.row ,cls.col = plist[cls.element-2].get_position()
                 m.set_element(cls.row,cls.col,0)
                 print "P",cls.element-2,"you are  dead"
-           time.sleep(3)           	
+                if  plist[cls.element-2].get_key() == 1 :
+				    plist[p.get_who()].set_key()
+           time.sleep(3)   
+        elif  cls.element == 2 :
+           cls.atk = p.atk()
+           plist[cls.element-2].damaged(p.get_who(),cls.atk,plist)
+           if plist[cls.element-2].get_live()<=0 :
+                cls.row ,cls.col = plist[cls.element-2].get_position()
+                m.set_element(cls.row,cls.col,0)
+                print "Boss",cls.element-2,"is  dead"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
            
