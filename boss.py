@@ -7,19 +7,22 @@ class Boss(Player):
     
     global row
     global column
-    global boss_direct        #Boss想攻擊或行走的方向
+                               #Boss想攻擊或行走的方向
     row = 6*[100]
     column = 6*[100]
-    boss_direct = 'w'
-    damage = 5*[0]
+    
+    
 
     def __init__(self):
         super(Boss, self).__init__(0)
+
         self.__hp = 50
         self.__dmg = 3
         self.__turn = 0
         self.__sense = 7       #Boss的感應範圍
-
+        self.__damage = 5*[0]
+        self.__boss_direct = 'w'
+ 
     def get_sense(self):
         return self.__sense 
     
@@ -40,19 +43,19 @@ class Boss(Player):
         i=1
         while i<=player_number :
             if row[i] == row[0]-1 and column[i] == column[0] :      #是否有玩家位於Boss攻擊範圍
-                boss_direct = 'w'
+                self.boss_direct = 'w'
                 print ("Boss choose atk up!")
                 return "atk"
             if row[i] == row[0]+1 and column[i] == column[0] :
-                boss_direct = 's'
+                self.boss_direct = 's'
                 print ("Boss choose atk down!")
                 return "atk"
             if row[i] == row[0] and column[i] == column[0]-1 :
-                boss_direct = 'a'
+                self.boss_direct = 'a'
                 print ("Boss choose atk left!")
                 return "atk"
             if row[i] == row[0] and column[i] == column[0]+1 :
-                boss_direct = 'd'
+                self.boss_direct = 'd'
                 print ("Boss choose atk right!")
                 return "atk"
             i+=1
@@ -87,23 +90,23 @@ class Boss(Player):
             
 
         print ("Boss choose noop!")
-        return "noop"
+        return "close"
 
 
 
         
     def atk_pos(self) :
-         return boss_direct
+         return self.boss_direct
 
     def  damaged(self,who,value,plist) :
          self.__hp =  self.__hp - value
-         damage[who] = damage[who]+value
-         print "Boss",self.__who,"have",self.__hp,"hp"
+         self.__damage[who] = self.__damage[who]+value
+         print "Boss have",self.__hp,"hp"
          if self.__hp <= 0 :
              self.__live = 0
-             rank = sorted(damage)
+             rank = sorted(self.__damage)
              for i in range(5) :
-                if  damage[i] == rank[0] :
+                if  self.__damage[i] == rank[4] :
                      la = i
                      break
              plist[i].set_key() 
