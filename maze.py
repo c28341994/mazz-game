@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 import random
-import player 
+import player
 from gamehelper import*
 
 
@@ -10,8 +10,8 @@ class Maze:
     global player_column
     player_row = 6*[100]
     player_column = 6*[100]
-    
-    
+
+
     def __init__(self):         #初始化迷宮
         self.__maze =  [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                        [1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -46,46 +46,46 @@ class Maze:
             player_column[who] = random.randrange(0,24)
             if self.__maze[player_row[who]][player_column[who]] == 0 :
                 self.__maze[player_row[who]][player_column[who]] = who+2
-                return player_row[who],player_column[who]       
-     
-    def set_element(self,row,col,element):
-          
-		  self.__maze[row][col]  =  element
-	
-	
-    def get_element(self,row,col):
-           
-         return self.__maze[row][col]    
+                return player_row[who],player_column[who]
 
-    def  set_position (self,who,row,col) :         
+    def set_element(self,row,col,element):
+
+		  self.__maze[row][col]  =  element
+
+
+    def get_element(self,row,col):
+
+         return self.__maze[row][col]
+
+    def  set_position (self,who,row,col) :
           self.__maze[player_row[who]][player_column[who]] = 0
           player_row[who] = row
-          player_column[who] = col  
+          player_column[who] = col
           self.__maze[player_row[who]][player_column[who]] = who+2
 
     def print_maze(self,p):                         #列印迷宮
         who = p.get_who()
         for i in range(0, 25, 1):
             for j in range(0, 25, 1):
-                if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense(): 
-                    if self.__maze[i][j] == 0 : 
+                if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense():
+                    if self.__maze[i][j] == 0 :
                       print " ",               				  #無東西
                     elif self.__maze[i][j] == who+2 :
-                      print("@"),  
-                    elif self.__maze[i][j] == 1 : 
+                      print("@"),
+                    elif self.__maze[i][j] == 1 :
                       print("*"),                                 #牆壁
-                    elif self.__maze[i][j] == 2 : 
+                    elif self.__maze[i][j] == 2 :
                       print("B"),                                 #boss
-                    elif self.__maze[i][j] == 3 : 
+                    elif self.__maze[i][j] == 3 :
                       print("1"),                                 #玩家1
-                    elif self.__maze[i][j] == 4 : 
+                    elif self.__maze[i][j] == 4 :
                       print("2"),                                 #玩家2
-                    elif self.__maze[i][j] == 5 : 
+                    elif self.__maze[i][j] == 5 :
                       print("3"),                                 #玩家3
-                    elif self.__maze[i][j] == 6 : 
+                    elif self.__maze[i][j] == 6 :
                       print("4"),                                 #玩家4
-                    elif self.__maze[i][j] == 7 : 
-                      print("5"),                                 #玩家5  
+                    elif self.__maze[i][j] == 7 :
+                      print("5"),                                 #玩家5
                     else:
                       print("$"),                                 #終點
                 else:
@@ -136,7 +136,7 @@ class Maze:
                     player_column[who] -= 1
                 else:
                     player_column[who] += 1
-                if  self.__maze[player_row[who]][player_column[who]] != 9:   
+                if  self.__maze[player_row[who]][player_column[who]] != 9:
                     self.__maze[player_row[who]][player_column[who]] = who+2     #變成玩家後來位置
 
             else:
@@ -145,36 +145,10 @@ class Maze:
         p.set_position(player_row[who],player_column[who])
 
 
-        
+
     def out_maze(self,who):                                             #判斷是否走到終點了
         if self.__maze[player_row[who]][player_column[who]] == 9:
             print("恭喜獲勝!!!")
             return 1
         else:
             return 0
-
-
-
-
-    
-#***********************************************************************
-
-if __name__ == "__main__":
-
-
-    
-    
-    
-    M = Maze()                              #設定迷宮及初始位置
-    M.rand_position(1)
-    M.print_maze()
-        
-    
-
-
-
-
-
-
-
-

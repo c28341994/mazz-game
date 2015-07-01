@@ -1,31 +1,30 @@
-# -*- coding: cp950 -*-
+# -*- coding: utf8 -*-
 from player import Player
 import maze
 import random
 
 class Boss(Player):
-    
+
     global row
     global column
-                               #Boss·Q§ğÀ»©Î¦æ¨«ªº¤è¦V
+                              #Bossæƒ³æ”»æ“Šæˆ–è¡Œèµ°çš„æ–¹å‘
     row = 6*[100]
     column = 6*[100]
-    
-    
+
+
 
     def __init__(self):
-        super(Boss, self).__init__(0)
-
+        super(Boss, self).__init__(0,0)
         self.__hp = 50
         self.__dmg = 3
         self.__turn = 0
-        self.__sense = 7       #Bossªº·PÀ³½d³ò
+        self.__sense = 7      #Bossçš„æ„Ÿæ‡‰ç¯„åœ
         self.__damage = 5*[0]
         self.__boss_direct = 'w'
- 
+
     def get_sense(self):
-        return self.__sense 
-    
+        return self.__sense
+
     def movement(self,plist):
         self.__turn += 1
         self.__action = ["mv","atk","close","noop"]
@@ -36,13 +35,13 @@ class Boss(Player):
 
         player_number = len(plist) - 1
         i=0
-        while i<=player_number :                  #ª±®a»Pboss¦ì¸m
+        while i<=player_number :                  #ç©å®¶èˆ‡bossä½ç½®
             row[i],column[i] = plist[i].get_position()
             i+=1
 
         i=1
         while i<=player_number :
-            if row[i] == row[0]-1 and column[i] == column[0] :      #¬O§_¦³ª±®a¦ì©óBoss§ğÀ»½d³ò
+            if row[i] == row[0]-1 and column[i] == column[0] :      #æ˜¯å¦æœ‰ç©å®¶ä½æ–¼Bossæ”»æ“Šç¯„åœ
                 self.boss_direct = 'w'
                 print ("Boss choose atk up!")
                 return "atk"
@@ -59,11 +58,11 @@ class Boss(Player):
                 print ("Boss choose atk right!")
                 return "atk"
             i+=1
-            
+
         i=1
         while i<=player_number :
             if (row[i]<=row[0]-self.__sense or row[i]>=row[0]-self.__sense) and (column[i]<=column[0]-self.__sense or column[i]>=column[0]-self.__sense) :
-                #­Y¦³¤H¦bBoss·PÀ³½d³ò¤º¡A«h°õ¦æ¥H¤U¨BÆJ§PÂ_Boss¸Ó¨«­ş¸Ì
+                #è‹¥æœ‰äººåœ¨Bossæ„Ÿæ‡‰ç¯„åœå…§ï¼Œå‰‡åŸ·è¡Œä»¥ä¸‹æ­¥é©Ÿåˆ¤æ–·Bossè©²èµ°å“ªè£¡
                 if ((row[0]>=row[i] and column[0]>=column[i] and row[0]-row[i]>=column[0]-column[i]) or (row[0]>=row[i] and column[0]<=column[i] and row[0]-row[i]>=column[i]-column[0])) and M.get_element(row[0]-1,column[0]) == 0 :
                     print "Boss find player ",i," !!!"
                     print ("Boss choose move up!")
@@ -81,20 +80,14 @@ class Boss(Player):
                     print ("Boss choose move right!")
                     return 'd'
                 i+=1
-                
-            
 
-
-
-
-            
 
         print ("Boss choose noop!")
         return "close"
 
 
 
-        
+
     def atk_pos(self) :
          return self.boss_direct
 
@@ -109,12 +102,4 @@ class Boss(Player):
                 if  self.__damage[i] == rank[4] :
                      la = i
                      break
-             plist[i].set_key() 
-         
-
-
-if __name__ == "__main__" :
-
-    b = Boss()
-    x = b.atk()
-    print x
+             plist[i].set_key()
