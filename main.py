@@ -33,8 +33,9 @@ player_number = input("Please enter the number of player : ")
 while i <= player_number:
     conn ,addr = s.accept()
     conn.send("Welcome to __ __ __")
-    conn.send(str(i))
     p.append(player.Player(i,conn))
+    p[i].get_conn().send(str(i))
+
     row,column = M.rand_position(i)
     p[i].set_position(row,column)
     i+=1
@@ -42,7 +43,7 @@ while i <= player_number:
 
 i = 1
 while i <= player_number:
-    Gamehelper.now_playing(p[i],M,p)
+    Gamehelper.now_playing(p[i],M,p,player_number)
     if M.out_maze(i) == 1:
         break
     if i == player_number:

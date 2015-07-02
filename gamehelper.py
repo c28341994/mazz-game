@@ -7,20 +7,25 @@ class Gamehelper:
 
 
     @classmethod
-    def now_playing(cls,p,m,plist):
+    def now_playing(cls,p,m,plist,player_number):
         who = p.get_who()
         if p.get_live()> 0 :
             cls.clear()
             m.print_maze(p)
-            if who!= 0 :
-                print ("現在是玩家\r")
-                print (who)
-                print ("的回合!\r")
-                print
+            for i in range(1,player_number+1):
+                if who!= 0 :
+
+                    plist[i].get_conn().send(str(who))
+                    whoseturn = "It's player"+str(who)+"'s turn'!\n"
+                    plist[i].get_conn().send(whoseturn)
+
+                else :
+                    plist[i].get_conn().send("It's turn of boss!\n")
+            if who == 0:
+                    movement = p.movement(plist)
             else :
-               print ("現在是Boss的回合!\r")
-               print
-            movement = p.movement(plist)
+                    movement = p.movement()
+
             if movement=='w' or  movement=='s' or  movement=='a' or  movement=='d' :
                    m.move(movement,p)
                    time.sleep(1)
@@ -30,7 +35,7 @@ class Gamehelper:
             elif movement == "noop":
                     pass
             elif movement == "close":
-                    if who<3 :
+                    if who<player_number :
                         cls.row ,cls.col =  plist[who+1].get_position()
                     else  :
                         cls.row ,cls.col =  plist[0].get_position()

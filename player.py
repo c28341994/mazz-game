@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 import random
+import socket
 from gamehelper import*
 
 class Player(object) :
@@ -47,9 +48,9 @@ class Player(object) :
    def get_conn(self):
         return self.__conn
 
-   def  movement(self,plist):                                                #決定玩家行動
+   def  movement(self):                                                #決定玩家行動
         while 1:
-           self.x = raw_input("Please enter what you want to do : ")
+           self.x = self.__conn.recv(1024)
            if self.x == "mv":                                          #玩家選擇移動則回傳其欲移動方向
               return self.move()
            elif self.x == "atk":                                       #玩家選擇攻擊，則回傳其攻擊力
@@ -63,7 +64,7 @@ class Player(object) :
    def  move(self):
 
        while 1:
-         self.x = raw_input("Please enter where you want to go : ")
+         self.x = self.__conn.recv(1024)
          if self.x=='w' or  self.x=='s' or  self.x=='a' or  self.x=='d' :
             return self.x
          else:
@@ -73,7 +74,7 @@ class Player(object) :
 
    def atk_pos(self) :
          while 1:
-            self.direct  = raw_input ("Where do you want to attack?")
+            self.direct  = self.__conn.recv(1024)
             if self.direct=='w' or  self.direct=='s' or  self.direct=='a' or  self.direct=='d' :
                 return self.direct
             else :
