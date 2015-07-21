@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 import maze
 import player
 import boss
@@ -34,7 +34,7 @@ while i <= player_number:
     conn ,addr = s.accept()
     conn.send("Welcome to __ __ __")
     p.append(player.Player(i,conn))
-    p[i].get_conn().send(str(i))
+    conn.send(str(i))
 
     row,column = M.rand_position(i)
     p[i].set_position(row,column)

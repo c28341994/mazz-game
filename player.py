@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 import random
 import socket
@@ -35,12 +35,6 @@ class Player(object) :
 
    def get_position(self):
         return self.__row, self.__column
-
-   def get_row(self):
-        return self.__row
-
-   def get_column(self):
-        return self.__column
 
    def get_live(self):
         return self.__live

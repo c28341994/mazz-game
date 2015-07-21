@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 import random
 import player
 from gamehelper import*
@@ -39,6 +39,13 @@ class Maze:
                        [1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,1,0,1],
                        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
+    def get_maze(self):
+
+        return self.__maze
+
+    def get_position(self,i):
+
+        return player_row[i],player_column[i]
 
     def rand_position(self,who):                 #隨機玩家位置(可做瞬間移動發展)
         while 1:

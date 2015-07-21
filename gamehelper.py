@@ -1,7 +1,8 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 import time
 import socket
+import pickle
 
 class Gamehelper:
 
@@ -13,14 +14,29 @@ class Gamehelper:
             cls.clear()
             m.print_maze(p)
             for i in range(1,player_number+1):
+                row ,column = m.get_position(i)
+                print row
+                print column
+                sense = plist[i].get_sense()
+                conn = plist[i].get_conn()
+
+                conn.send(str(who))
+                time.sleep(.2)
+                conn.send(str(row))
+                time.sleep(.2)
+                conn.send(str(column))
+                time.sleep(.2)
+                conn.send(str(sense))
+                time.sleep(.2)
+                conn.send(pickle.dumps(m.get_maze()))
+
                 if who!= 0 :
 
-                    plist[i].get_conn().send(str(who))
-                    whoseturn = "It's player"+str(who)+"'s turn'!\n"
-                    plist[i].get_conn().send(whoseturn)
+                    whoseturn = "It's player"+str(who)+"'s turn'!"
+                    conn.send(str(whoseturn))
 
                 else :
-                    plist[i].get_conn().send("It's turn of boss!\n")
+                    conn.send("It's turn of boss!")
             if who == 0:
                     movement = p.movement(plist)
             else :
