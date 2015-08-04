@@ -74,7 +74,7 @@ class Maze:
         who = p.get_who()
         for i in range(0, 25, 1):
             for j in range(0, 25, 1):
-                if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense():
+                #if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense():
                     if self.__maze[i][j] == 0 :
                       print " ",               				  #無東西
                     elif self.__maze[i][j] == who+2 :
@@ -95,8 +95,8 @@ class Maze:
                       print("5"),                                 #玩家5
                     else:
                       print("$"),                                 #終點
-                else:
-                    print " ",
+                #else:
+                    #print " ",
             print
 
 
