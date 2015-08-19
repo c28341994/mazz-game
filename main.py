@@ -44,7 +44,7 @@ while i <= player_number:
 i = 1
 while i <= player_number:
     Gamehelper.now_playing(p[i],M,p,player_number)
-    if M.out_maze(i) == 1:
+    if M.out_maze(i,p) == 1:
         break
     if i == player_number:
         i = -1

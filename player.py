@@ -10,7 +10,7 @@ class Player(object) :
         self.__who = who
         self.__live = 1
         self.__hp = 10
-        self.__dmg = 3
+        self.__dmg = 100
         self.__row = 0
         self.__column = 0
         self.__key = 0

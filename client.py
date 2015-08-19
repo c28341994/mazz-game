@@ -39,7 +39,7 @@ while 1:
     column = int(s.recv(4))
     print column
 
-    sense = int(s.recv(16))
+    sense = int(s.recv(4))
     print sense
     data = s.recv(8196)
     maze = pickle.loads(data)
@@ -77,8 +77,19 @@ while 1:
     if who == nowwho:
         motion = raw_input("Please enter what you want to do : ")
         s.send(motion)
-        if motion == "mv" or "atk":
+        if motion == "mv" :
+            out = 0
+            while out == 0 :
+
+                direct = raw_input("Please decide where you want to go : ")
+                s.send(direct)
+                out = int(s.recv(4))
+                if out == 0:
+                    print("此處不能走，請再輸入一次")
+
+        elif motion ==  "atk" :
             direct = raw_input("Please input direct you decide : ")
             s.send(direct)
+
 
 os.system("pause")

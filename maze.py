@@ -77,8 +77,8 @@ class Maze:
                 #if i>=player_row[who]-p.get_sense() and i<=player_row[who]+p.get_sense() and j>=player_column[who]-p.get_sense() and j<=player_column[who]+p.get_sense():
                     if self.__maze[i][j] == 0 :
                       print " ",               				  #無東西
-                    elif self.__maze[i][j] == who+2 :
-                      print("@"),
+                    #elif self.__maze[i][j] == who+2 :
+                      #print("@"),
                     elif self.__maze[i][j] == 1 :
                       print("*"),                                 #牆壁
                     elif self.__maze[i][j] == 2 :
@@ -131,9 +131,12 @@ class Maze:
     def move(self,direct,p):                         #執行玩家之移動
         who = p.get_who()
         out = 0
+        conn = p.get_conn()
         while out == 0 :
             if self.judge_move(direct,who) == 1:
                 out = 1
+                if who != 0:
+                    conn.send(str(out))
                 self.__maze[player_row[who]][player_column[who]] = 0            #使原本位置變為0
                 if direct == "w":
                     player_row[who] -= 1
@@ -147,14 +150,16 @@ class Maze:
                     self.__maze[player_row[who]][player_column[who]] = who+2     #變成玩家後來位置
 
             else:
+                if who != 0:
+                    conn.send(str(out))
                 print("此處不能走，請再輸入一次")
-                direct = raw_input("Please enter where you want to go : ")
+                direct = p.move()
         p.set_position(player_row[who],player_column[who])
 
 
 
-    def out_maze(self,who):                                             #判斷是否走到終點了
-        if self.__maze[player_row[who]][player_column[who]] == 9:
+    def out_maze(self,who,plist):                                             #判斷是否走到終點了
+        if self.__maze[player_row[who]][player_column[who]] == 9 and plist[who].get_key() == 1:
             print("恭喜獲勝!!!")
             return 1
         else:

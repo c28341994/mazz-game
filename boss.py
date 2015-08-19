@@ -18,12 +18,16 @@ class Boss(Player):
         self.__hp = 50
         self.__dmg = 3
         self.__turn = 0
+        self.__live = 1
         self.__sense = 7      #Boss的感應範圍
         self.__damage = 5*[0]
         self.__boss_direct = 'w'
 
     def get_sense(self):
         return self.__sense
+
+    def get_live(self):
+        return self.__live
 
     def movement(self,plist):
         self.__turn += 1
@@ -82,11 +86,12 @@ class Boss(Player):
                 i+=1
 
 
-        print ("Boss choose noop!")
-        return "close"
+        """print ("Boss choose noop!")
+        return "noop"
+        """
 
-
-
+    def atk(self):
+         return random.randrange(0,self.__dmg)
 
     def atk_pos(self) :
          return self.boss_direct
@@ -97,9 +102,11 @@ class Boss(Player):
          print "Boss have",self.__hp,"hp"
          if self.__hp <= 0 :
              self.__live = 0
+             print "Boss is died"
              rank = sorted(self.__damage)
              for i in range(5) :
                 if  self.__damage[i] == rank[4] :
                      la = i
                      break
              plist[i].set_key()
+             print "P",i,"get key"

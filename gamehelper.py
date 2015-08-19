@@ -10,24 +10,22 @@ class Gamehelper:
     @classmethod
     def now_playing(cls,p,m,plist,player_number):
         who = p.get_who()
-        if p.get_live()> 0 :
+        if p.get_live() > 0 :
             cls.clear()
             m.print_maze(p)
             for i in range(1,player_number+1):
                 row ,column = m.get_position(i)
-                print row
-                print column
                 sense = plist[i].get_sense()
                 conn = plist[i].get_conn()
 
                 conn.send(str(who))
-                time.sleep(.2)
+                time.sleep(.1)
                 conn.send(str(row))
-                time.sleep(.2)
+                time.sleep(.1)
                 conn.send(str(column))
-                time.sleep(.2)
+                time.sleep(.1)
                 conn.send(str(sense))
-                time.sleep(.2)
+                time.sleep(.1)
                 conn.send(pickle.dumps(m.get_maze()))
 
                 if who!= 0 :
@@ -53,9 +51,11 @@ class Gamehelper:
             elif movement == "close":
                     if who<player_number :
                         cls.row ,cls.col =  plist[who+1].get_position()
+                        print cls.row ,cls.col
                     else  :
                         cls.row ,cls.col =  plist[0].get_position()
-                    if m.get_element(cls.row,cls.col) == 0 :
+                        print cls.row ,cls.col
+                    if m.get_element(cls.row+1,cls.col) == 0 :
 
                           p.set_position(cls.row+1,cls.col)
                           m.set_position(who,cls.row+1,cls.col)
@@ -85,6 +85,9 @@ class Gamehelper:
 
     @classmethod
     def judgeatk(cls,p,m,direct,value,plist):
+        if who!= 0 :
+            conn = p.get_conn()
+
         cls.row ,cls.col = p.get_position()
         cls.atk = p.atk()
         if direct == 'w':
@@ -99,7 +102,9 @@ class Gamehelper:
 
 
         if cls.element == 0 or cls.element == 1:
-           print "You deal massive damage to air"
+           result = "You deal massive damage to air"
+           print result
+
            time.sleep(3)
         elif  2 <  cls.element and cls.element <=7 :
 
@@ -119,4 +124,4 @@ class Gamehelper:
            if plist[cls.element-2].get_live()<=0 :
                 cls.row ,cls.col = plist[cls.element-2].get_position()
                 m.set_element(cls.row,cls.col,0)
-                print "Boss",cls.element-2,"is  dead"
+                print "Boss is  dead"
