@@ -8,7 +8,7 @@ class Gamehelper:
 
 
     @classmethod
-    def now_playing(cls,p,m,plist,player_number):
+    def client(cls,p,m,plist,player_number):
         who = p.get_who()
         if p.get_live() > 0 :
             cls.clear()
@@ -19,13 +19,13 @@ class Gamehelper:
                 conn = plist[i].get_conn()
 
                 conn.send(str(who))
-                time.sleep(.1)
+
                 conn.send(str(row))
-                time.sleep(.1)
+
                 conn.send(str(column))
-                time.sleep(.1)
+
                 conn.send(str(sense))
-                time.sleep(.1)
+
                 conn.send(pickle.dumps(m.get_maze()))
 
                 if who!= 0 :

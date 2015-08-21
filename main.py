@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import maze
-import player
-import boss
-import socket
+"""import gevent.monkey
+gevent.monkey.patch_socket()
+"""
+import maze, player, boss, socket, gevent
+
 from gamehelper import*
 
 HOST = ''
@@ -29,6 +30,7 @@ row,column = M.rand_position(0)
 p[0].set_position(row,column)
 
 i = 1
+threads = []
 player_number = input("Please enter the number of player : ")
 while i <= player_number:
     conn ,addr = s.accept()
@@ -40,12 +42,6 @@ while i <= player_number:
     p[i].set_position(row,column)
     i+=1
 
-
 i = 1
 while i <= player_number:
-    Gamehelper.now_playing(p[i],M,p,player_number)
-    if M.out_maze(i,p) == 1:
-        break
-    if i == player_number:
-        i = -1
-    i += 1
+    threads.append(gevent.spawn(Gamehelper.client,p[i],M,p,player_number))
