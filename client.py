@@ -9,7 +9,7 @@ def clear():                                                    #強制清屏
     for i in range(40):
         print
 
-HOST = '192.168.1.103'
+HOST = '127.0.0.1'
 PORT = 8888
 
 try:

@@ -19,13 +19,13 @@ class Gamehelper:
                 conn = plist[i].get_conn()
 
                 conn.send(str(who))
-                time.sleep(.1)
+                time.sleep(.01)
                 conn.send(str(row))
-                time.sleep(.1)
+                time.sleep(.01)
                 conn.send(str(column))
-                time.sleep(.1)
+                time.sleep(.01)
                 conn.send(str(sense))
-                time.sleep(.1)
+                time.sleep(.01)
                 conn.send(pickle.dumps(m.get_maze()))
 
                 if who!= 0 :
