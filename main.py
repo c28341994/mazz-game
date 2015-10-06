@@ -5,7 +5,7 @@ import boss
 import socket
 from gamehelper import*
 
-HOST = ''
+HOST = '1233s'
 PORT = 8888
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
